@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@500&display=swap');
+
+@font-face {
+    font-family: 'jaapokkiregular';
+    src: url('jaapokki-regular-webfont.woff2') format('woff2'),
+         url('jaapokki-regular-webfont.woff') format('woff');
+}
+
+:root {
+    --colour-black: black;
+    --colour-white: white;
+    
+    /* dynamic colours */
+    --colour-body: black;
+    --colour-text: white;
+    
+    --colour-grad-x: red;
+    --colour-grad-y: blue;
+    
+    --heading: "jaapokkiregular", sans-serif;
+    --subheading: "jaapokkiregular", sans-serif;
+    --content: "jaapokkiregular", sans-serif;
+    
+    --bold: 800;
+    --semi-bold: 500;
+    --regular: 400;
+
+    --linespace: 1.5;
+    --padding: 3em;
+    --gap: 1em;
+    
+    --shadow: 0 0 10px 1px rgba(0,0,0,0.3);
+    
+    --round: 100%;
+    
+    /* z-index */
+    --z-nav: 10;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+/* ::selection {
+    background-color: var(--colour-black);
+    color: var(--colour-white);
+} */
+
+html {
+    font: var(--regular) 1em/var(--linespace) var(--content);
+    color: var(--colour-text);
+}
+
+p {
+    font: var(--regular) 1.2em/var(--linespace) var(--content);
+    margin-bottom: 1em;
+}
+
+p span {
+    font: var(--bold) 1em/var(--linespace) var(--content);
+}
+
+h1 {
+    font: var(--bold) 2em/1.3 var(--heading);
+    color: var(--colour-text);
+}
+
+h2 {
+    font: var(--bold) 1.625em/1.3 var(--heading);
+}
+h3 {
+    font: var(--bold) 1.125em/var(--linespace) var(--heading);
+    color: var(--colour-text);
+}
+h4 {
+    font: var(--bold) 1em/var(--linespace) var(--subheading);
+    color: var(--colour-text);
+}
+h4 span {
+    font: var(--regular) 0.9em/var(--linespace) var(--subheading);
+}
+
+h6 {
+    font: 700 0.8em/var(--linespace) var(--subheading);
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font: unset;
+}
+button img {
+    width: 2.5em;
+    pointer-events: none;
+}
+button:hover img {
+    transform: scale(1.1);
+}
+
+button a {
+    font: unset;
+    color: var(--colour-text);
+}
+
+/* ________________SECTION HEADER__________________ */
+
+main {
+    background: radial-gradient(circle, var(--colour-grad-x) 0%, var(--colour-grad-y) 100%);
+    background-size: 300% 300%;
+    -webkit-animation: gradBG 51s ease infinite;
+    animation: gradBG 51s ease infinite;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+div.tip {
+    --colour-text: var(--colour-white);
+    display: grid;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-items: center;
+    padding: var(--padding);
+}
+div.tip div {
+    display: grid;
+    width: 100%;
+    grid-template-columns: min-content auto;
+    align-items: flex-start;
+    gap: var(--gap);
+}
+div.tip h1 {
+    max-width: 40em;
+}
+div.tip button {
+    margin-top: calc(var(--gap) / 2);
+}
+
+nav.socials {
+    position: fixed;
+    z-index: var(--z-nav);
+    bottom: var(--padding);
+    left: var(--padding);
+}
+nav.socials ul {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: var(--gap);
+}
+
+@-webkit-keyframes gradBG {
+    0%{background-position:25% 25%}
+    50%{background-position:50% 35%}
+    100%{background-position:25% 25%}
+}
+@keyframes gradBG {
+    0%{background-position:25% 25%}
+    50%{background-position:50% 35%}
+    100%{background-position:25% 25%}
+}
+
+
+@media screen and (min-width: 70em) {
+    
+}
+
