@@ -1,10 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@500&display=swap');
-
-@font-face {
-    font-family: 'jaapokkiregular';
-    src: url('jaapokki-regular-webfont.woff2') format('woff2'),
-         url('jaapokki-regular-webfont.woff') format('woff');
-}
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap');
 
 :root {
     --colour-black: black;
@@ -17,13 +11,13 @@
     --colour-grad-x: red;
     --colour-grad-y: blue;
     
-    --heading: "jaapokkiregular", sans-serif;
-    --subheading: "jaapokkiregular", sans-serif;
-    --content: "jaapokkiregular", sans-serif;
+    --heading: "heebo", sans-serif;
+    --subheading: "heebo", sans-serif;
+    --content: "heebo", sans-serif;
     
-    --bold: 800;
+    --bold: 500;
     --semi-bold: 500;
-    --regular: 400;
+    --regular: 500;
 
     --linespace: 1.5;
     --padding: 3em;
@@ -101,16 +95,25 @@ button {
     font: unset;
 }
 button img {
-    width: 2.5em;
+    height: 1.5em;
     pointer-events: none;
+    display: block;
 }
-button:hover img {
-    transform: scale(1.1);
-}
-
 button a {
     font: unset;
     color: var(--colour-text);
+    display: block;
+}
+
+.tip button img {
+    height: 2.5em;
+}
+.tip button:hover img {
+    transform: scale(1.1);
+}
+
+.socials button:hover img {
+    opacity: 0.8;
 }
 
 /* ________________SECTION HEADER__________________ */
@@ -143,7 +146,7 @@ div.tip div {
     gap: var(--gap);
 }
 div.tip h1 {
-    max-width: 40em;
+    max-width: 36em;
 }
 div.tip button {
     margin-top: calc(var(--gap) / 2);
