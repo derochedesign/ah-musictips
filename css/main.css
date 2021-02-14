@@ -20,7 +20,7 @@
     --regular: 500;
 
     --linespace: 1.5;
-    --padding: 3em;
+    --padding: 1.5em;
     --gap: 1em;
     
     --shadow: 0 0 10px 1px rgba(0,0,0,0.3);
@@ -141,7 +141,7 @@ div.tip {
 div.tip div {
     display: grid;
     width: 100%;
-    grid-template-columns: min-content auto;
+    grid-template-rows: min-content auto;
     align-items: flex-start;
     gap: var(--gap);
 }
@@ -177,6 +177,12 @@ nav.socials ul {
 
 
 @media screen and (min-width: 70em) {
-    
+    :root {
+        --padding: 3em;
+    }
+    .tip div {
+        grid-template-columns: min-content auto;
+        grid-template-rows: unset;
+    }
 }
 
