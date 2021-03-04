@@ -1,30 +1,12 @@
 const root = document.documentElement;
 const tipField = document.getElementById("tip");
 const bg = document.getElementById("gradBG");
-const memMax = 3;
+const memMax = 20;
+const dupItsMax = 15;
+let allTips = [];
+let dupIts = 0;
 
-const testTips = [
-    {
-        id:101,
-        tip:"Create a background effect by cutting out a small slice of your existing audio and manipulating it (pitch shift, time stretch, reverse, reverb, filter, delay, frequency shift...)."
-    },
-    {
-        id: 102,
-        tip:"Automate a swell in volume or a prominent effect parameter of any sound that leads into an important beat."
-    },
-    {
-        id:103,
-        tip:"tip 3."
-    },
-    {
-        id:104,
-        tip:"tip 4."
-    },
-    {
-        id:105,
-        tip:"tip 5."
-    },
-]
+const sheetsURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS_Is8Zr4T80LdOQU5RPIP97HWzco90a1ekiXKxYNCtVhzreC83Shw1sTX_Tvfd2uvFqApcoYHZ37OA/pub?gid=0&single=true&output=csv';
 
 const colourSets = [
     {x:"rgb(194,84,246)", y:"rgb(48,54,123)"},
@@ -42,7 +24,8 @@ let prevState = [
     }
 ]
 
-//all click events
+//all events
+window.addEventListener('DOMContentLoaded', loadSheets);
 document.addEventListener("click", e => {
     
     //if matches
@@ -58,11 +41,18 @@ const getCC = _ => {
 
 const genState = _ => {
     //setColours
-    let currTip = testTips[Math.floor(Math.random() * Math.floor(testTips.length))];
+    let currTip = allTips[Math.floor(Math.random() * Math.floor(allTips.length))];
     let result = prevState.filter(state => state.id === currTip.id);
     console.log(currTip.id);
     
-    if (result.length == 0) {
+    if (dupIts === 999) {
+        //if too many rand iterations, then just increment the previous tip id by one. if previous was the last tip, then go to beginning
+        currTip = (prevState[prevState.length - 1].id === allTips[allTips.length - 1].id) ? allTips[0] : allTips[prevState[prevState.length - 1].id - 100];
+        result = [];
+        dupIts = 0;
+    }
+    
+    if (result.length === 0) {
         
         let randGrad = Math.floor(Math.random() * Math.floor(colourSets.length));
         
@@ -88,11 +78,31 @@ const genState = _ => {
     }
     else {
         console.log("DUP");
+        dupIts++;
+        if (dupIts > dupItsMax) {
+            dupIts = 999;
+            console.log("DUP CUT");
+        }
+        
         genState();
     }
     
     console.log(prevState);
 }
 
-//init
-genState();
+function loadSheets() {
+    Papa.parse(sheetsURL, {
+        download: true,
+        header: false,
+        complete: genArr
+    });
+}
+
+function genArr(results) {
+    results.data.map((tipArr, i) => {
+        allTips[i] = {id: 101 + i, tip: tipArr[0]};
+    });
+    console.log(allTips);
+    //init
+    genState();
+}
