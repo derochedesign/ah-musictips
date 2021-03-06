@@ -8,8 +8,10 @@
     --colour-body: black;
     --colour-text: white;
     
-    --colour-grad-x: red;
-    --colour-grad-y: blue;
+    --colour-grad-x: white;
+    --colour-grad-y: white;
+    
+    --largest-dist: 0;
     
     --heading: "heebo", sans-serif;
     --subheading: "heebo", sans-serif;
@@ -119,16 +121,49 @@ button a {
 /* ________________SECTION HEADER__________________ */
 
 main {
-    background: radial-gradient(circle, var(--colour-grad-x) 0%, var(--colour-grad-y) 100%);
-    background-size: 300% 300%;
-    -webkit-animation: gradBG 51s ease infinite;
-    animation: gradBG 51s ease infinite;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     position: fixed;
+    opacity: 0;
+    transition: opacity 1s ease;
 }
+main.active {
+    opacity: 1;
+}
+.bg-shell {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: -1;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    overflow: hidden;
+}
+.bg-grad {
+    background: radial-gradient(circle, var(--colour-grad-x) 0%, var(--colour-grad-y) 100%);
+    background-size: 300% 300%;
+    -webkit-animation: gradBG 51s ease infinite;
+    animation: gradBG 51s ease infinite;
+    width: 80px;
+    height: 80px;
+    border-radius: var(--round);
+    transition: 1s ease;
+    position: absolute;
+}
+
+.bg-shell.active .bg-grad {
+    width: calc(var(--largest-dist) * 1.42);
+    height: calc(var(--largest-dist) * 1.42);
+}
+.bg-shell.active .loader-anim {
+    display: none;
+}
+
 div.tip {
     --colour-text: var(--colour-white);
     display: grid;
@@ -149,7 +184,7 @@ div.tip h1 {
     max-width: 36em;
 }
 div.tip button {
-    margin-top: calc(var(--gap) / 2);
+    /* margin-top: calc(var(--gap) / 2); */
 }
 
 nav.socials {
@@ -162,6 +197,22 @@ nav.socials ul {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: var(--gap);
+}
+
+.loader-anim {
+    width: 110px;
+    height: 110px;
+    animation: loaderAnim 2s linear infinite;
+    fill: var(--colour-grad-x);
+}
+
+@-webkit-keyframes loaderAnim {
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(359deg)}
+}
+@keyframes loaderAnim {
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(359deg)}
 }
 
 @-webkit-keyframes gradBG {

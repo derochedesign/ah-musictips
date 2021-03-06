@@ -1,12 +1,14 @@
 const root = document.documentElement;
 const tipField = document.getElementById("tip");
 const bg = document.getElementById("gradBG");
-const memMax = 20;
-const dupItsMax = 15;
+const mainBody = document.getElementById("mainBody");
+const memMax = 30;
+const dupItsMax = 25;
 let allTips = [];
 let dupIts = 0;
+let randGrad;
 
-const sheetsURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS_Is8Zr4T80LdOQU5RPIP97HWzco90a1ekiXKxYNCtVhzreC83Shw1sTX_Tvfd2uvFqApcoYHZ37OA/pub?gid=0&single=true&output=csv';
+const sheetsURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSCgpXv8IJAZPzQ_RAWY7PIRedKHrCeWjOVHo1xogs-mzrXkQZh9J7d3VAONBjN4dsLUhsP-LYdRQUy/pub?gid=0&single=true&output=csv';
 
 const colourSets = [
     {x:"rgb(194,84,246)", y:"rgb(48,54,123)"},
@@ -25,7 +27,8 @@ let prevState = [
 ]
 
 //all events
-window.addEventListener('DOMContentLoaded', loadSheets);
+window.addEventListener('DOMContentLoaded', initAll);
+
 document.addEventListener("click", e => {
     
     //if matches
@@ -34,6 +37,12 @@ document.addEventListener("click", e => {
     }
     
 });
+
+function resizeView() {
+    root.style.setProperty('--largest-dist', `${(window.innerWidth > window.innerHeight) ? window.innerWidth : window.innerHeight}px`);
+}
+  
+window.onresize = resizeView;
 
 const getCC = _ => {
     return (Math.floor(Math.random() * Math.floor(255))) + 1;
@@ -54,14 +63,17 @@ const genState = _ => {
     
     if (result.length === 0) {
         
-        let randGrad = Math.floor(Math.random() * Math.floor(colourSets.length));
+        if (prevState.length > 1) {
+            randGrad = Math.floor(Math.random() * Math.floor(colourSets.length));
+        }
         
         while (randGrad === prevState[prevState.length - 1].grad) {
             randGrad = Math.floor(Math.random() * Math.floor(colourSets.length));
             console.log("DUP COL");
         }
-            root.style.setProperty('--colour-grad-x', colourSets[randGrad].x);
-            root.style.setProperty('--colour-grad-y', colourSets[randGrad].y);
+        
+        root.style.setProperty('--colour-grad-x', colourSets[randGrad].x);
+        root.style.setProperty('--colour-grad-y', colourSets[randGrad].y);
         
         //newTip
         tipField.innerText = currTip.tip;
@@ -90,7 +102,15 @@ const genState = _ => {
     console.log(prevState);
 }
 
-function loadSheets() {
+function initAll() {
+    //get initial colours
+    randGrad = Math.floor(Math.random() * Math.floor(colourSets.length));
+    root.style.setProperty('--colour-grad-x', colourSets[randGrad].x);
+    root.style.setProperty('--colour-grad-y', colourSets[randGrad].y);
+    
+    //set largest dist
+    root.style.setProperty('--largest-dist', `${(window.innerWidth > window.innerHeight) ? window.innerWidth : window.innerHeight}px`);
+    
     Papa.parse(sheetsURL, {
         download: true,
         header: false,
@@ -104,5 +124,7 @@ function genArr(results) {
     });
     console.log(allTips);
     //init
+    bg.parentElement.classList.add("active");
+    mainBody.classList.add("active");
     genState();
 }
