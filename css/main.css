@@ -107,6 +107,12 @@ button a {
     display: block;
 }
 
+.tip button {
+    position: fixed;
+    bottom: var(--padding);
+    right: var(--padding);
+}
+
 .tip button img {
     height: 2.5em;
 }
@@ -227,9 +233,14 @@ nav.socials ul {
 }
 
 
-@media screen and (min-width: 70em) {
+@media screen and (min-width: 60em) {
     :root {
         --padding: 3em;
+    }
+    .tip button {
+        position: static;
+        bottom: unset;
+        right: unset;
     }
     .tip div {
         grid-template-columns: min-content auto;
