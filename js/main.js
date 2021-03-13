@@ -2,8 +2,8 @@ const root = document.documentElement;
 const tipField = document.getElementById("tip");
 const bg = document.getElementById("gradBG");
 const mainBody = document.getElementById("mainBody");
-const memMax = 30;
-const dupItsMax = 25;
+const memMax = 60;
+const dupItsMax = 55;
 let allTips = [];
 let dupIts = 0;
 let randGrad;
@@ -13,9 +13,14 @@ const sheetsURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSCgpXv8IJAZP
 const colourSets = [
     {x:"rgb(194,84,246)", y:"rgb(48,54,123)"},
     {x:"rgb(255,8,97)", y:"rgb(214,242,140)"},
-    {x:"rgb(212,58,130)", y:"rgb(150,75,12)"},
-    {x:"rgb(194,4,46)", y:"rgb(79,156,98)"},
-    {x:"rgb(240,184,56)", y:"rgb(210,54,180)"}
+    {x:"rgb(240,184,56)", y:"rgb(210,54,180)"},
+    {x:"rgb(222,147,162)", y:"rgb(211,99,166)"},
+    
+    {x:"rgb(85,41,210)", y:"rgb(102,160,233)"},
+    {x:"rgb(23,196,209)", y:"rgb(74,231,44)"},
+    {x:"rgb(140,205,49)", y:"rgb(139,119,6)"},
+    
+    {x:"rgb(213,73,24)", y:"rgb(221,6,40)"}
 ]
 
 let prevState = [
