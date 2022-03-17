@@ -11,16 +11,20 @@ let randGrad;
 const sheetsURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSCgpXv8IJAZPzQ_RAWY7PIRedKHrCeWjOVHo1xogs-mzrXkQZh9J7d3VAONBjN4dsLUhsP-LYdRQUy/pub?gid=0&single=true&output=csv';
 
 const colourSets = [
-    {x:"rgb(194,84,246)", y:"rgb(48,54,123)"},
-    {x:"rgb(255,8,97)", y:"rgb(214,242,140)"},
-    {x:"rgb(240,184,56)", y:"rgb(210,54,180)"},
-    {x:"rgb(222,147,162)", y:"rgb(211,99,166)"},
+    {x:"rgb(194,84,246)", y:"rgb(48,54,123)"}, //purple
+    {x:"rgb(255,214,0)", y:"rgb(214,242,140)"}, //yellow
+    {x:"rgb(240,184,56)", y:"rgb(210,54,180)"}, //dark-peach
+    {x:"rgb(255,170,187)", y:"rgb(236,85,175)"}, //pink
     
-    {x:"rgb(85,41,210)", y:"rgb(102,160,233)"},
-    {x:"rgb(23,196,209)", y:"rgb(74,231,44)"},
-    {x:"rgb(140,205,49)", y:"rgb(139,119,6)"},
+    {x:"rgb(85,41,210)", y:"rgb(102,160,233)"}, //dark blue
+    {x:"rgb(23,196,209)", y:"rgb(44,231,141)"}, //blue-gren
+    {x:"rgb(140,205,49)", y:"rgb(240,252,103)"}, //green
     
-    {x:"rgb(213,73,24)", y:"rgb(221,6,40)"}
+    {x:"rgb(242,62,83)", y:"rgb(221,6,40)"}, //red
+    {x:"rgb(246,113,84)", y:"rgb(123,48,120)"}, //red-orange
+    {x:"rgb(88,239,249)", y:"rgb(14,71,182)"}, //lightblue
+    {x:"rgb(255,157,41)", y:"rgb(243,238,112)"}, //orange
+    {x:"rgb(139,88,249)", y:"rgb(255,49,21)"} //red-purple
 ]
 
 let prevState = [
@@ -57,7 +61,6 @@ const genState = _ => {
     //setColours
     let currTip = allTips[Math.floor(Math.random() * Math.floor(allTips.length))];
     let result = prevState.filter(state => state.id === currTip.id);
-    console.log(currTip.id);
     
     if (dupIts === 999) {
         //if too many rand iterations, then just increment the previous tip id by one. if previous was the last tip, then go to beginning
@@ -72,9 +75,8 @@ const genState = _ => {
             randGrad = Math.floor(Math.random() * Math.floor(colourSets.length));
         }
         
-        while (randGrad === prevState[prevState.length - 1].grad) {
+        while (randGrad === prevState[prevState.length - 1].grad || ((prevState[prevState.length - 2]) && randGrad === prevState[prevState.length - 2].grad)) {
             randGrad = Math.floor(Math.random() * Math.floor(colourSets.length));
-            console.log("DUP COL");
         }
         
         root.style.setProperty('--colour-grad-x', colourSets[randGrad].x);
@@ -94,17 +96,13 @@ const genState = _ => {
         });
     }
     else {
-        console.log("DUP");
         dupIts++;
         if (dupIts > dupItsMax) {
             dupIts = 999;
-            console.log("DUP CUT");
         }
         
         genState();
     }
-    
-    console.log(prevState);
 }
 
 function initAll() {
@@ -127,7 +125,6 @@ function genArr(results) {
     results.data.map((tipArr, i) => {
         allTips[i] = {id: 101 + i, tip: tipArr[0]};
     });
-    console.log(allTips);
     //init
     bg.parentElement.classList.add("active");
     mainBody.classList.add("active");

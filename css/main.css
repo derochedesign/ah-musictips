@@ -42,10 +42,10 @@
     font-smoothing: antialiased;
 }
 
-/* ::selection {
-    background-color: var(--colour-black);
-    color: var(--colour-white);
-} */
+::selection {
+    background-color: var(--colour-text);
+    color: var(--colour-body);
+}
 
 html {
     font: var(--regular) 1em/var(--linespace) var(--content);
@@ -74,7 +74,7 @@ h3 {
     color: var(--colour-text);
 }
 h4 {
-    font: var(--bold) 1em/var(--linespace) var(--subheading);
+    font: var(--regular) 0.8em/var(--linespace) var(--subheading);
     color: var(--colour-text);
 }
 h4 span {
@@ -82,7 +82,7 @@ h4 span {
 }
 
 h6 {
-    font: 700 0.8em/var(--linespace) var(--subheading);
+    font: var(--regular) 0.6em/var(--linespace) var(--subheading);
 }
 
 li {
@@ -198,11 +198,30 @@ nav.socials {
     z-index: var(--z-nav);
     bottom: var(--padding);
     left: var(--padding);
+    
+    display: flex;
+    flex-direction: row;
 }
 nav.socials ul {
     display: grid;
     grid-template-columns: auto auto auto;
     gap: var(--gap);
+}
+
+.shameless-plug {
+    position: fixed;
+    z-index: var(--z-nav);
+    bottom: var(--padding);
+    right: var(--padding);
+    text-align: right;
+    display: none;
+}
+.shameless-plug > * {
+    opacity: 0.7;
+    line-height: 1;
+}
+.shameless-plug > a:hover {
+    opacity: 1;
 }
 
 .loader-anim {
@@ -245,6 +264,9 @@ nav.socials ul {
     .tip div {
         grid-template-columns: min-content auto;
         grid-template-rows: unset;
+    }
+    .shameless-plug {
+        display: block;
     }
 }
 
