@@ -1,5 +1,6 @@
 const root = document.documentElement;
 const tipField = document.getElementById("tip");
+const errField = document.getElementById("err");
 const bg = document.getElementById("gradBG");
 const mainBody = document.getElementById("mainBody");
 const memMax = 60;
@@ -117,8 +118,13 @@ function initAll() {
     Papa.parse(sheetsURL, {
         download: true,
         header: false,
-        complete: genArr
+        complete: genArr,
+        error: handleErr
     });
+}
+
+const handleErr = (err) => {
+    errField.style.display = "grid";
 }
 
 function genArr(results) {
