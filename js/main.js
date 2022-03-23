@@ -13,7 +13,7 @@ const sheetsURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSCgpXv8IJAZP
 
 const colourSets = [
     {x:"rgb(194,84,246)", y:"rgb(48,54,123)"}, //purple
-    {x:"rgb(255,214,0)", y:"rgb(214,242,140)"}, //yellow
+    {x:"rgb(255,214,0)", y:"rgb(250,205,170)"}, //yellow
     {x:"rgb(240,184,56)", y:"rgb(210,54,180)"}, //dark-peach
     {x:"rgb(255,170,187)", y:"rgb(236,85,175)"}, //pink
     
